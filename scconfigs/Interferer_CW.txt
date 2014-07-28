@@ -1,0 +1,16 @@
+//Interferer_CW.txt
+//Basic Information:
+filename = "Interferer_CW";
+
+//Parameters for White Gaussian Noise
+params = 
+{
+
+    // Enable CW interferer
+    addCWInterfererBaseband = 1;
+    // Power difference between CW interferer and desired carrier in dB
+	// (Positive number means the CW iccnterferer is stronger than the desired carrier)
+    cw_pow = -20.0;
+	// Baseband frequency of the CW interferer in hertz
+	cw_freq = 1.0e5;
+};

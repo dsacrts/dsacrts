@@ -1,0 +1,21 @@
+//RiceFading1.txt
+//Basic Information:
+filename = "RiceFading1";
+
+//Parameters for Rice-K Fading
+params = 
+{
+
+    // Enable AWGN
+    addAWGNBaseband = 1;
+    // Theoretical SNR per bit (Eb/N0)
+    noiseSNR = 20.0;
+
+
+    // Enable Fading
+    addRicianFadingBaseband = 1;
+    // K factor for Ricean Fading
+    fadeK = 1.6;
+    // Maximum Doppler Frequency  (relative to center frequency)
+    fadeFd = 0.1;
+};

@@ -1,0 +1,140 @@
+// Basic Information:
+name        = "User Engine File";
+description = "This cognitive engine is designed to be updated by a user or program while CRTS is running.";
+
+// The point of this file is to allow a person or external program to control the Tx parameters of CRTS, rather
+// than one of the the internal CRTS engines.
+
+// This cognitive engine is designed to be updated by a user or program while CRTS is running.
+// If the 'adaptationCondition' option is set to "user_specified", CRTS will read the CE config file with
+// the name "userEngine.txt" every cognition cycle, and it will update every option that is listed in the file.
+
+// To change an option, simply replace the current setting with a different one and CRTS will
+// update accordingly on the next pass.
+
+// For example, to change the modulation scheme from 64PSK to 16PSK, simply replace the line
+//     modScheme           =   "64PSK";
+// with
+//     modScheme           =   "16PSK";
+
+// NOTE: It is very important not to ever change the 'adaptationCondition' option. It must remain
+// set to "user_specified" for CRTS to continue reading this file, rather than revert to
+// an internal CE.
+
+// Parameters
+params = 
+{
+    // Goal for when a CE is considered to have completed a 
+    // test in a particular scenario.
+    // If there is an X in the goal. That value is specified by 
+    // the 'threshold' option.
+    goal                =   "X_errorFreePayloads";
+    
+    // Threshold for when the CE has reached its 'goal'
+    threshold           =   1000.0;
+
+    // Specifies the condition under which the CE will
+    // perform the adaptation specified in
+    // the 'adaptation' option.
+    adaptationCondition =   "user_specified";
+
+    // Specifies what adaption will be made when 
+    // the condition specified by the 'adaptationCondition'
+    // option is met.
+    // Keep set to "None" when using the "user_specified"
+    // 'adaptationCondition' option.
+    adaptation  =   "None";
+
+    // For CE's that adapt based on the PER Rate.
+    // Threshold for deciding whether to make an adaptation.
+    PER_threshold       =   0.5;
+
+    // For CE's that adapt based on the BER Rate.
+    // Threshold for deciding whether to make an adaptation.
+    BER_threshold       =   0.05;
+
+    // Delay between sending of each frame.
+    // In microseconds. Must be an int.
+    delay_us            =   1000000;
+
+    // Carrier frequency for when using USRPs.
+    // In Hz. Must be a float. 
+    // Possible Values depend on your USRP hardware.
+    // Helpful information can be found with the command
+    // $ uhd_usrp_probe
+    frequency           =   460e6;
+
+    // Bandwidth given to UHD driver
+    // In Hz. 
+    bandwidth = 1.0e6;
+
+    // Tx Gain given to UHD Driver. 
+    // In dB. Must be a float.
+    // Possible Values depend on your USRP hardware.
+    // Helpful information can be found with the command
+    // $ uhd_usrp_probe
+    uhd_txgain_dB       =   15.0;
+
+    // Tx Gain applied to baseband signal before it is sent to USRP.
+    // In dB. Should always be a float. 
+    // Any float value is possible but beware that the USRP only accepts
+    // sample values between -1.0 and 1.0 so don't make it too large. 
+    // Currently only applicable when using USRPs.
+    txgain_dB           =   -10.0;
+
+    // Modulation scheme for the payload of the frame.
+    // The header of the frame always uses BPSK.
+    // Possible values are "OOK", "BPSK", "QPSK", "8PSK", "16PSK", "32PSK", 
+    // "64PSK", "128PSK", "8QAM", "16QAM", "32QAM", "64QAM", "BASK", 
+    // "4ASK", "8ASK", "16ASK", "32ASK", "64ASK", and "128ASK"
+    // See the liquid-dsp documentation for more information on these options.
+    modScheme           =   "BPSK";
+
+    // Cyclic Redundancy Check for packet
+    // Possible values are "none", "checksum", "8", "16", "24", and "32"
+    // See the liquid-dsp documentation for more information on these options.
+    crcScheme           =   "8";            
+
+    // Inner and Outer forward Error Correction Codes
+    // Possible values are "none", "Hamming74", "Hamming128", 
+    // "Golay2412", "SEC-DED2216", "SEC-DED3932", "SEC-DED7264" 
+    // See the liquid-dsp documentation for more information on these options.
+    innerFEC            =   "Hamming74";    
+    outerFEC            =   "none";
+
+    // Length of payload in bytes. 
+    // Can be any non-negative integer (within limits of unsigned int)
+    payloadLen          =   60;     
+
+    // For CE's that change payload length. 
+    // These parameters can be any non-negative integer (within limits of unsigned int)
+        // How much to increase or decrease payload by.
+        payloadLenIncrement =   2;      
+        // Maximum allowed payload length. 
+        payloadLenMax       =   200;    
+        // Minumum allowed payload length. 
+        payloadLenMin       =   40;     
+
+    // Number of Subcarriers for OFDM symbol.
+    // See the liquid-dsp documentation for more information.
+    numSubcarriers = 64;
+
+    // Cyclic Prefix Length for OFDM symbol.
+    // See the liquid-dsp documentation for more information.
+    CPLen   =   16;
+
+    // Taper Length for OFDM symbol.
+    // See the liquid-dsp documentation for more information.
+    taperLen = 4;
+
+
+
+
+
+
+
+                            
+
+
+
+};

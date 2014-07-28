@@ -1,0 +1,133 @@
+//master_dsa_file.txt
+
+params=
+{
+
+//The total number of times the primary user will
+//transmit and rest. After the primary user has finished
+//all of its cycles it will send a message to the controller
+//and the test will end
+totalcycles = 20
+
+//The DSA technique being used to detect the primary user
+//"m" = Header Matching
+//"e" = Energy Detection with FFT
+//"r" = Receivers do the sensing and communicate with transmitter using TCP
+//"t" = Energy Detection using Receivers to sense and transmit simultaneously
+detectiontype = "t";
+};
+
+//Parameters used by the FFT function during Energy Detection
+fft=
+{
+
+//Bandwidth scanned by the FFT function
+bandwidth = 1000000.0;
+
+//Bandwidth of each channel in the full bandwidth (doesn't do anything right now)
+channelbandwidth = 500000.0;
+
+//Sampling rate of the FFT usrp
+rate = 195312;
+
+//Number of bins measured by FFT
+numbins = 128;
+
+//Antennae of the FFT usrp
+antennae = "RX2";
+
+//Float added to the noise floor to create a threshold
+noiseadder = 0.0;
+
+noisemult = 1.2;
+
+noisefloormeasuredbins = 3;
+
+noisefloorrepeat = 30;
+
+noisefloortestnumber = 1;
+
+//Number of bins to be added together to find the power
+//of the center frequency
+measuredbins = 3;
+
+//Number of times the secondary user will run fft function
+//before reaching a decision
+testnumber = 1;
+
+//Number of times the fft function will use FFT before averaging together the samples
+repeat = 30;
+
+//If debug=1 every time the fft function runs it will print out the values of the boolean cantransmit,
+//which determines if the secondary user can transmit, the measured power of the center frequency, and
+//the threshold value the measured power is being compared to
+//If debug=0 nothing is printed out
+debug = 1;
+
+//The receiver gain of the FFT USRP
+gain=90.0;
+};
+
+
+//Parameters of the primary user
+PU=
+{
+
+//Base burst time (float) How long the primary user transmits before stopping
+bursttime = 5.0;
+
+//Every cycle the base burst time will have a random int between 0 and burstrandom added to it
+//to find the burst time for that cycle
+burstrandom = 4;
+
+//Base rest time (float) How long the primary user is inactive before it starts a new cycles
+//and begins transmitting again
+resttime = 8.0;
+
+//Every cycle the base rest time will have a random int between 0 and burstrandom added to it
+//to find the rest time for that cycle
+restrandom = 5;
+
+//The file name in ceconfigs that corresponds to the primary user's cognitive engine
+ce = "primary.txt";
+
+//The number of frames the primary user will send in a row before stopping and checking if it
+//has exceeded its burst time
+uninterruptedframes = 1;
+
+//adapt = 1 if it uses postTxTasks to adapt based on receiver feedback. adapt = 0 if the primary user doesn't adapt
+adapt = 0;
+
+//usescenario = 1 if a scenario is applied to the signal before it is transmitted
+//if usescenario = 0 no scenario is applied
+usescenario = 0;
+
+//The scenario file name in scconfigs that will be used is usescenario=1
+scenario = "sc1.txt"
+};
+
+//Parameters for the secondary user
+SU=
+{
+
+//How many seconds the secondary user will stay in sensing mode without detecting a primary transmission
+//Only used with Header Matching
+scantime = 2.0;
+
+//Filename for file in ceconfigs that corresponds to the cognitive engine for the secondary user
+ce = "secondary.txt";
+
+//How many frames the secondary user will send in a row before stopping to check for the primary user
+uninterruptedframes = 50;
+
+//adapt = 1 if it uses postTxTasks to adapt based on receiver feedback. adapt = 0 if the secondary user doesn't adapt
+adapt = 0;
+
+//usescenario = 1 if a scenario is applied to the signal before it is transmitted
+//if usescenario = 0 no scenario is applied
+usescenario = 0;
+
+//The scenario file name in scconfigs that will be used is usescenario=1
+scenario = "AWGN.txt"
+};
+

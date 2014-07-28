@@ -1,0 +1,56 @@
+
+//config1.txt
+// Basic Information:
+name = "Master Configuation File for Congnitive Engines";
+description = "This file specifies which CE config files to use in a run of CRTS";
+
+
+// CRTS lets CE's be defined through configuration files.
+// This special file lets users tell CRTS which CE config files 
+// should be used in the next test.
+// i.e. it tells CRTS what cognitive engines to run.
+
+// When a user defines a CE config file, it can be given any filename.
+// Simply replace "ce1.txt", "ce2.txt", etc. with the filenames of the
+// CE config files to be tested.
+
+// For example, if you create a new CE config file and call it "myFirstCE.txt",
+// Simply replace the line
+//      cogengine_1 = "ce1.txt"
+// with
+//      cogengine_1 = "myFirstCE.txt"
+
+// If you would like to test multiple CE config files, be sure to also update
+// the 'NumberofCogEngines' paramter accordingly. 
+// For example, if using two CE config files: "myFirstCE.txt" and "mySecondCE.txt",
+// replae the single line
+//      NumberofCogEngines = 1;
+// with the single line
+//      NumberofCogEngines = 2;
+// and replace the single line
+//      cogengine_1 = "ce1.txt";
+// with the two lines
+//      cogengine_1 = "myFirstCE.txt";
+//      cogengine_2 = "mySecondCE.txt";
+
+// Parameters
+params = 
+{
+    # To only test one CE, use the format:
+    NumberofCogEngines = 1;
+    cogengine_1 = "ce1.txt";
+
+    ## To test multiple CE's, use the format:
+    #NumberofCogEngines = 4;
+    #cogengine_1 = "ce1.txt";
+    #cogengine_2 = "ce2.txt";
+    #cogengine_3 = "ce3.txt";
+    #cogengine_4 = "ce4.txt";
+
+    ## To let a user or program specify the CE adaptations, use
+    ## the special file: "userEngine.txt".
+    ## Read the file "userEngine.txt" for more information.
+    #NumberofCogEngines = 1;
+    #cogengine_1 = "userEngine.txt";
+
+};

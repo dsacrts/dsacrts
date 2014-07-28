@@ -1,0 +1,13 @@
+//AWGN1.txt
+//Basic Information:
+filename = "AWGN1";
+
+//Parameters for White Gaussian Noise
+params = 
+{
+
+    // Enable AWGN
+    addAWGNBaseband = 1;
+    // Theoretical SNR per bit (Eb/N0)
+    noiseSNR = 20.0;
+};
